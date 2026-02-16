@@ -1,0 +1,13 @@
+.{
+    .name = .aoc,
+    .version = "0.0.1",
+    .fingerprint = 0x808a3f8f6895d2e7,
+    .minimum_zig_version = "0.15.2",
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "LICENSE",
+        //"README.md",
+    },
+}
