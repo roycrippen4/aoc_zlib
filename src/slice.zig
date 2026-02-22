@@ -2,6 +2,9 @@ const std = @import("std");
 const mem = std.mem;
 const testing = std.testing;
 
+/// TODO: dont forget to remove this later
+pub fn remove_me_later() void {}
+
 pub fn SliceTuple(comptime T: type) type {
     return struct { []const T, []const T };
 }
