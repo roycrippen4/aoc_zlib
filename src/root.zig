@@ -41,8 +41,70 @@ pub const Day = enum {
     @"24",
     @"25",
 
+    const Self = @This();
+
     pub inline fn format(self: @This(), writer: *Writer) !void {
         try writer.print("Day {s}", .{@tagName(self)});
+    }
+
+    fn to_url(self: Self) []const u8 {
+        return switch (self) {
+            .@"01" => "https://adventofcode.com/2025/day/1/input",
+            .@"02" => "https://adventofcode.com/2025/day/2/input",
+            .@"03" => "https://adventofcode.com/2025/day/3/input",
+            .@"04" => "https://adventofcode.com/2025/day/4/input",
+            .@"05" => "https://adventofcode.com/2025/day/5/input",
+            .@"06" => "https://adventofcode.com/2025/day/6/input",
+            .@"07" => "https://adventofcode.com/2025/day/7/input",
+            .@"08" => "https://adventofcode.com/2025/day/8/input",
+            .@"09" => "https://adventofcode.com/2025/day/9/input",
+            .@"10" => "https://adventofcode.com/2025/day/10/input",
+            .@"11" => "https://adventofcode.com/2025/day/11/input",
+            .@"12" => "https://adventofcode.com/2025/day/12/input",
+            .@"13" => "https://adventofcode.com/2025/day/13/input",
+            .@"14" => "https://adventofcode.com/2025/day/14/input",
+            .@"15" => "https://adventofcode.com/2025/day/15/input",
+            .@"16" => "https://adventofcode.com/2025/day/16/input",
+            .@"17" => "https://adventofcode.com/2025/day/17/input",
+            .@"18" => "https://adventofcode.com/2025/day/18/input",
+            .@"19" => "https://adventofcode.com/2025/day/19/input",
+            .@"20" => "https://adventofcode.com/2025/day/20/input",
+            .@"21" => "https://adventofcode.com/2025/day/21/input",
+            .@"22" => "https://adventofcode.com/2025/day/22/input",
+            .@"23" => "https://adventofcode.com/2025/day/23/input",
+            .@"24" => "https://adventofcode.com/2025/day/24/input",
+            .@"25" => "https://adventofcode.com/2025/day/25/input",
+        };
+    }
+
+    fn to_filepath(self: Self) []const u8 {
+        return switch (self) {
+            .@"01" => "src/data/day01.txt",
+            .@"02" => "src/data/day02.txt",
+            .@"03" => "src/data/day03.txt",
+            .@"04" => "src/data/day04.txt",
+            .@"05" => "src/data/day05.txt",
+            .@"06" => "src/data/day06.txt",
+            .@"07" => "src/data/day07.txt",
+            .@"08" => "src/data/day08.txt",
+            .@"09" => "src/data/day09.txt",
+            .@"10" => "src/data/day10.txt",
+            .@"11" => "src/data/day11.txt",
+            .@"12" => "src/data/day12.txt",
+            .@"13" => "src/data/day13.txt",
+            .@"14" => "src/data/day14.txt",
+            .@"15" => "src/data/day15.txt",
+            .@"16" => "src/data/day16.txt",
+            .@"17" => "src/data/day17.txt",
+            .@"18" => "src/data/day18.txt",
+            .@"19" => "src/data/day19.txt",
+            .@"20" => "src/data/day20.txt",
+            .@"21" => "src/data/day21.txt",
+            .@"22" => "src/data/day22.txt",
+            .@"23" => "src/data/day23.txt",
+            .@"24" => "src/data/day24.txt",
+            .@"25" => "src/data/day25.txt",
+        };
     }
 };
 
