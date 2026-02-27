@@ -1,4 +1,5 @@
 const std = @import("std");
+const testing = std.testing;
 const Allocator = std.mem.Allocator;
 const Writer = std.io.Writer;
 
@@ -43,41 +44,42 @@ pub const Day = enum {
 
     const Self = @This();
 
-    pub inline fn format(self: @This(), writer: *Writer) !void {
-        try writer.print("Day {s}", .{@tagName(self)});
-    }
-
-    fn to_url(self: Self) []const u8 {
+    pub fn to_string(self: Self) []const u8 {
         return switch (self) {
-            .@"01" => "https://adventofcode.com/2025/day/1/input",
-            .@"02" => "https://adventofcode.com/2025/day/2/input",
-            .@"03" => "https://adventofcode.com/2025/day/3/input",
-            .@"04" => "https://adventofcode.com/2025/day/4/input",
-            .@"05" => "https://adventofcode.com/2025/day/5/input",
-            .@"06" => "https://adventofcode.com/2025/day/6/input",
-            .@"07" => "https://adventofcode.com/2025/day/7/input",
-            .@"08" => "https://adventofcode.com/2025/day/8/input",
-            .@"09" => "https://adventofcode.com/2025/day/9/input",
-            .@"10" => "https://adventofcode.com/2025/day/10/input",
-            .@"11" => "https://adventofcode.com/2025/day/11/input",
-            .@"12" => "https://adventofcode.com/2025/day/12/input",
-            .@"13" => "https://adventofcode.com/2025/day/13/input",
-            .@"14" => "https://adventofcode.com/2025/day/14/input",
-            .@"15" => "https://adventofcode.com/2025/day/15/input",
-            .@"16" => "https://adventofcode.com/2025/day/16/input",
-            .@"17" => "https://adventofcode.com/2025/day/17/input",
-            .@"18" => "https://adventofcode.com/2025/day/18/input",
-            .@"19" => "https://adventofcode.com/2025/day/19/input",
-            .@"20" => "https://adventofcode.com/2025/day/20/input",
-            .@"21" => "https://adventofcode.com/2025/day/21/input",
-            .@"22" => "https://adventofcode.com/2025/day/22/input",
-            .@"23" => "https://adventofcode.com/2025/day/23/input",
-            .@"24" => "https://adventofcode.com/2025/day/24/input",
-            .@"25" => "https://adventofcode.com/2025/day/25/input",
+            .@"01" => "1",
+            .@"02" => "2",
+            .@"03" => "3",
+            .@"04" => "4",
+            .@"05" => "5",
+            .@"06" => "6",
+            .@"07" => "7",
+            .@"08" => "8",
+            .@"09" => "9",
+            .@"10" => "10",
+            .@"11" => "11",
+            .@"12" => "12",
+            .@"13" => "13",
+            .@"14" => "14",
+            .@"15" => "15",
+            .@"16" => "16",
+            .@"17" => "17",
+            .@"18" => "18",
+            .@"19" => "19",
+            .@"20" => "20",
+            .@"21" => "21",
+            .@"22" => "22",
+            .@"23" => "23",
+            .@"24" => "24",
+            .@"25" => "25",
         };
     }
 
-    fn to_filepath(self: Self) []const u8 {
+    pub inline fn format(self: Self, writer: *Writer) !void {
+        try writer.print("Day {s}", .{@tagName(self)});
+    }
+
+    /// converts the day into my standard path for data files
+    pub fn to_filepath(self: Self) []const u8 {
         return switch (self) {
             .@"01" => "src/data/day01.txt",
             .@"02" => "src/data/day02.txt",
@@ -104,6 +106,63 @@ pub const Day = enum {
             .@"23" => "src/data/day23.txt",
             .@"24" => "src/data/day24.txt",
             .@"25" => "src/data/day25.txt",
+        };
+    }
+};
+
+/// Creates an Advent of Code URL which can be used to fetch input data.
+pub fn make_input_url(buf: []u8, day: Day, year: Year) []u8 {
+    const day_str = day.to_string();
+    const year_str = year.to_string();
+    const template = "https://adventofcode.com/{s}/day/{s}/input";
+    return std.fmt.bufPrint(buf, template, .{ year_str, day_str }) catch "";
+}
+test "root make_url" {
+    var buf: [64]u8 = undefined;
+    {
+        const expected = "https://adventofcode.com/2021/day/19/input";
+        const actual = make_input_url(&buf, .@"19", .@"2021");
+        try testing.expectEqualSlices(u8, expected, actual);
+    }
+    {
+        const expected = "https://adventofcode.com/2025/day/1/input";
+        const actual = make_input_url(&buf, .@"01", .@"2025");
+        try testing.expectEqualSlices(u8, expected, actual);
+    }
+}
+
+pub const Year = enum(u8) {
+    @"2015",
+    @"2016",
+    @"2017",
+    @"2018",
+    @"2019",
+    @"2020",
+    @"2021",
+    @"2022",
+    @"2023",
+    @"2024",
+    @"2025",
+
+    const Self = @This();
+
+    pub inline fn format(self: Self, writer: *Writer) !void {
+        try writer.print("AoC {s}", .{@tagName(self)});
+    }
+
+    pub fn to_string(self: Self) []const u8 {
+        return switch (self) {
+            .@"2015" => "2015",
+            .@"2016" => "2016",
+            .@"2017" => "2017",
+            .@"2018" => "2018",
+            .@"2019" => "2019",
+            .@"2020" => "2020",
+            .@"2021" => "2021",
+            .@"2022" => "2022",
+            .@"2023" => "2023",
+            .@"2024" => "2024",
+            .@"2025" => "2025",
         };
     }
 };
