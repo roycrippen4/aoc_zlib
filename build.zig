@@ -4,7 +4,7 @@ pub fn build(b: *std.Build) void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
 
-    const mod = b.addModule("aoc", .{
+    const mod = b.addModule("libaoc", .{
         .root_source_file = b.path("src/root.zig"),
         .target = target,
         .optimize = optimize,
@@ -26,7 +26,7 @@ pub fn build(b: *std.Build) void {
 
     const check = b.step("check", "Check if it compiles");
     const lib_check = b.addLibrary(.{
-        .name = "aoc",
+        .name = "libaoc",
         .root_module = mod,
     });
 

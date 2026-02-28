@@ -1,7 +1,7 @@
 .{
-    .name = .aoc,
+    .name = .libaoc,
     .version = "0.1.4",
-    .fingerprint = 0x808a3f8f6895d2e7,
+    .fingerprint = 0xb432a2ab2bc40597,
     .minimum_zig_version = "0.15.2",
     .paths = .{
         "build.zig",
