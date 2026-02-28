@@ -1,6 +1,6 @@
 .{
     .name = .libaoc,
-    .version = "0.1.4",
+    .version = "0.2.0",
     .fingerprint = 0xb432a2ab2bc40597,
     .minimum_zig_version = "0.15.2",
     .paths = .{
