@@ -193,7 +193,7 @@ fn StackIterator(comptime T: type) type {
 }
 
 test "stack is_full" {
-    var stack: Stack(usize, 3) = .{};
+    var stack: Stack(usize, 3) = .empty;
     stack.push(1);
     stack.push(2);
     try testing.expect(!stack.is_full());
@@ -202,7 +202,7 @@ test "stack is_full" {
 }
 
 test "stack push and pop" {
-    var stack: Stack(u32, 5) = .{};
+    var stack: Stack(u32, 5) = .empty;
     try testing.expectEqual(@as(usize, 0), stack.len);
     try testing.expect(stack.is_empty());
 
@@ -224,7 +224,7 @@ test "stack push and pop" {
 }
 
 test "stack push to capacity" {
-    var stack: Stack(i8, 3) = .{};
+    var stack: Stack(i8, 3) = .empty;
 
     try stack.push_safe(1);
     try stack.push_safe(2);
@@ -239,14 +239,14 @@ test "stack push to capacity" {
 }
 
 test "stack pop from empty" {
-    var stack: Stack(bool, 5) = .{};
+    var stack: Stack(bool, 5) = .empty;
     const result = stack.pop();
     try testing.expectEqual(null, result);
     try testing.expectEqual(@as(usize, 0), stack.len);
 }
 
 test "stack peek" {
-    var stack: Stack(u16, 4) = .{};
+    var stack: Stack(u16, 4) = .empty;
 
     stack.push(100);
     stack.push(200);
@@ -263,13 +263,11 @@ test "stack peek" {
 }
 
 test "stack peek on empty stack" {
-    const stack: Stack(f32, 3) = .{};
-    const result = stack.peek();
-    try testing.expectEqual(null, result);
+    try testing.expectEqual(null, Stack(f32, 3).empty.peek());
 }
 
 test "stack idx access" {
-    var stack: Stack(u8, 10) = .{};
+    var stack: Stack(u8, 10) = .empty;
     stack.push(5);
     stack.push(10);
     stack.push(15);
@@ -284,7 +282,7 @@ test "stack idx access" {
 test "stack copy" {
     const gpa = testing.allocator;
 
-    var stack: Stack(usize, 4) = .{};
+    var stack: Stack(usize, 4) = .empty;
     stack.push(11);
     stack.push(22);
 
